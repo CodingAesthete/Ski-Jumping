@@ -8,10 +8,12 @@ import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import SkiJumpers from './pages/SkiJumpers';
 import WorldCup from './pages/WorldCup';
+import Header from './components/Header';
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
