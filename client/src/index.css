@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: url('https://s1.1zoom.me/big0/566/Winter_Skiing_Snow_Sun_561779_1280x853.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
