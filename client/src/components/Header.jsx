@@ -17,7 +17,7 @@ export default function Header() {
           </div>
 
         </Link>
-        <ul className='flex gap-0 sm:gap-8 text-lg lg:text-2xl sm:whitespace-nowrap'>
+        <ul className='flex gap-0 sm:gap-8 text-lg lg:text-2xl xl:text-xl sm:whitespace-nowrap'>
           <Link to='/'>
             <li className='hidden lg:inline hover:underline cursor-pointer'>Home</li>
           </Link>
