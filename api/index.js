@@ -10,6 +10,7 @@ mongoose.connect(process.env.MONGO)
   .catch((err) => { console.log(err); })
 
 const app = express();
+app.use(express.json());
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
