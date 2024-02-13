@@ -20,7 +20,7 @@ export default function Header() {
           <Link to='/'>
             <li className='hidden lg:inline hover:underline cursor-pointer'>Home</li>
           </Link>
-          <Link to='/profile'>
+          <Link to='/sign-in'>
             <li className='hover:underline'> Sign in</li>
           </Link>
           <Link to='/world-cup'>
