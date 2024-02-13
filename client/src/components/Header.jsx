@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import { useSelector } from 'react-redux'
 
 export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <header className='bg-blue-600 text-white shadow-md'>
       <div className='flex justify-between items-center p-3 lg:gap-4 sm:mx-10'>
@@ -16,12 +18,9 @@ export default function Header() {
           </div>
 
         </Link>
-        <ul className='flex gap-0 sm:gap-8 text-lg lg:text-2xl xl:text-xl sm:whitespace-nowrap'>
+        <ul className='flex items-center gap-0 sm:gap-8 text-lg lg:text-2xl xl:text-xl sm:whitespace-nowrap'>
           <Link to='/'>
             <li className='hidden lg:inline hover:underline cursor-pointer'>Home</li>
-          </Link>
-          <Link to='/sign-in'>
-            <li className='hover:underline'> Sign in</li>
           </Link>
           <Link to='/world-cup'>
             <li className='hidden sm:inline hover:underline'> World Cup</li>
@@ -31,6 +30,11 @@ export default function Header() {
           </Link>
           <Link to='/hall-of-fame'>
             <li className='hidden xl:inline hover:underline'> Hall Of Fame</li>
+          </Link>
+          <Link to='/profile'>
+            {currentUser ? (
+              <img className='rounded-full h-10 w-10 object-cover' src={currentUser.avatar} alt='profile' />
+            ) : (<li className='hover:underline'>Sign in</li>)}
           </Link>
         </ul>
       </div>

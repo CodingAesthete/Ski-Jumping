@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: "https://us.123rf.com/450wm/tsapenkosveta/tsapenkosveta2201/tsapenkosveta220100029/180859577-polar-bear-ice-skating-training-funny-cartoon-winter-sport-mascot.jpg"
+      default: "https://i.pinimg.com/originals/34/65/33/346533ceb521f0ff1fb31dda668af017.jpg"
     }
   }, { timestamps: true });
 
