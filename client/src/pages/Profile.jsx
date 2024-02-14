@@ -2,7 +2,10 @@ import { useSelector } from 'react-redux';
 import { useRef, useState, useEffect } from 'react';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
-import { updateUserStart, updateUserSuccess, updateUserFailure, } from '../redux/user/userSlice';
+import {
+  updateUserStart, updateUserSuccess, updateUserFailure,
+  deleteUserStart, deleteUserSuccess, deleteUserFailure, signInStart
+} from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
 
 export default function Profile() {
@@ -71,6 +74,38 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message));
     }
   };
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`,
+        { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (err) {
+      dispatch(deleteUserFailure(err.message));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signInStart());
+      const res = await fetch('/api/auth/signout');
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (err) {
+      dispatch(deleteUserFailure(data.message));
+    }
+  };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-2'>Profile</h1>
@@ -125,8 +160,12 @@ export default function Profile() {
 
       </form>
       <div className="flex justify-between mt-7">
-        <span className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Delete account</span>
-        <span className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Sign out</span>
+        <span
+          onClick={handleDeleteUser}
+          className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Delete account</span>
+        <span
+          onClick={handleSignOut}
+          className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Sign out</span>
       </div>
 
       <p className='text-red-900 mt-5'>{error ? error : ''}</p>
