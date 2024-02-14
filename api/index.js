@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import userRouter from './routes/user.route.js'
 import authRouter from './routes/auth.route.js';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.use((err, req, res, next) => {
     success: false, statusCode, message
   });
 });
+
+app.use(cookieParser());
 
 app.listen(3000, () => {
   console.log('Port: 3000...');
