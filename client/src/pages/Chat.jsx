@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import styled from "styled-components";
 import Contacts from '../components/Contacts';
 import Welcome from '../components/Welcome';
+import ChatContainer from '../components/ChatContainer';
 
 export default function Chat() {
   const socket = useRef();
@@ -45,12 +46,11 @@ export default function Chat() {
       <Container>
         <div className="container">
           <Contacts contacts={contacts} changeChat={handleChatChange} />
-          {/* {currentChat === undefined ? (
+          {currentChat === undefined ? (
             <Welcome />
           ) : (
             <ChatContainer currentChat={currentChat} socket={socket} />
-          )} */}
-          <Welcome />
+          )}
         </div>
       </Container>
     </div>

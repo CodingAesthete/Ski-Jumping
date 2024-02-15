@@ -1,7 +1,108 @@
-import React from 'react'
+import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
 
-export default function ChatContainer() {
+export default function ChatContainer({ currentChat }) {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
-    <div>ChatContainer</div>
+    <Container>
+      <div className="chat-header">
+        <div className="user-details">
+          <div className="avatar">
+            <img
+              src={currentChat.avatar}
+              alt=""
+            />
+          </div>
+          <div className="username">
+            <h3>{currentChat.username}</h3>
+          </div>
+        </div>
+      </div>
+      <div className="chat-messages">
+
+      </div>
+      <div className='chat-input'>
+
+      </div>
+    </Container>
   )
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  gap: 0.1rem;
+  overflow: hidden;
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    grid-template-rows: 15% 70% 15%;
+  }
+  .chat-header {
+    border-radius: 0 0.5rem 0 0;
+    font-size: 1.02rem;
+    background-color: rgb(0, 60, 179);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 2rem;
+    .user-details {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .avatar {
+        img {
+          height: 2.5rem;
+          border-radius:100%;
+        }
+      }
+      .username {
+        h3 {
+          color: white;
+        }
+      }
+    }
+  }
+  .chat-messages {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0.2rem;
+      &-thumb {
+        background-color: #ffffff39;
+        width: 0.1rem;
+        border-radius: 1rem;
+      }
+    }
+    .message {
+      display: flex;
+      align-items: center;
+      .content {
+        max-width: 40%;
+        overflow-wrap: break-word;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 1rem;
+        color: #d1d1d1;
+        @media screen and (min-width: 720px) and (max-width: 1080px) {
+          max-width: 70%;
+        }
+      }
+    }
+    .sended {
+      justify-content: flex-end;
+      .content {
+        background-color: #4f04ff21;
+      }
+    }
+    .recieved {
+      justify-content: flex-start;
+      .content {
+        background-color: #9900ff20;
+      }
+    }
+  }
+`;
