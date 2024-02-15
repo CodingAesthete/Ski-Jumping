@@ -16,6 +16,25 @@ export const updateUser = async (req, res, next) => {
     if (req.body.password) {
       req.body.password = bcryptjs.hashSync(req.body.password, 10);
     }
+
+    //extract the username
+    User.findById(req.params.id)
+      .then(user => {
+        const username = user.username;
+        console.log(username);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    User.find({}, 'username')
+      .then(users => {
+        const usernames = users.map(user => user.username);
+        console.log(usernames);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {

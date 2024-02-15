@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { app } from '../firebase';
@@ -163,6 +164,10 @@ export default function Profile() {
         <span
           onClick={handleDeleteUser}
           className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Delete account</span>
+        <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
+          style={{ letterSpacing: '2px' }}>
+          Messages
+        </Link>
         <span
           onClick={handleSignOut}
           className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Sign out</span>
@@ -172,7 +177,7 @@ export default function Profile() {
       <p className='text-green-700 bg-blue-50 bg-opacity-60 px-2 font-bold mt-5'>
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
-    </div>
+    </div >
   )
 }
 
