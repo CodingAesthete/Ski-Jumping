@@ -35,8 +35,6 @@ export default function Chat() {
     fetchData();
   }, [currentUser._id]);
 
-  console.log(contacts);
-
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
