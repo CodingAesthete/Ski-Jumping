@@ -8,7 +8,7 @@ import ChatContainer from '../components/ChatContainer';
 
 export default function Chat() {
   const socket = useRef();
-  const [contacts, setContacts] = useState(undefined);
+  const [contacts, setContacts] = useState([]);
   const [currentChat, setCurrentChat] = useState(undefined);
   const { currentUser } = useSelector((state) => state.user);
 

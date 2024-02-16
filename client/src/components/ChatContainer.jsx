@@ -4,10 +4,11 @@ import styled from "styled-components";
 import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from "uuid";
 
-export default function ChatContainer({ currentChat }) {
+export default function ChatContainer({ currentChat, socket }) {
   const { currentUser } = useSelector((state) => state.user);
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,10 +33,22 @@ export default function ChatContainer({ currentChat }) {
     fetchData();
   }, [currentChat]);
 
-
-
+  useEffect(() => {
+    const getCurrentChat = async () => {
+      if (currentChat) {
+        await currentUser._id;
+      }
+    };
+    getCurrentChat();
+  }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
+    socket.current.emit("send-msg", {
+      to: currentChat._id,
+      from: currentUser._id,
+      msg,
+    });
+
     const res = await fetch(`/api/messages/addmsg`, {
       method: 'POST',
       headers: {
@@ -47,8 +60,30 @@ export default function ChatContainer({ currentChat }) {
         message: msg,
       })
     });
-    console.log(res);
+
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    console.log(msg);
+    setMessages(msgs);
   };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg) => {
+        console.log(msg);
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
 
   return (
     <Container>
