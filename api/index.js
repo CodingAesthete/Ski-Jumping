@@ -53,7 +53,8 @@ app.use((err, req, res, next) => {
 
 global.onlineUsers = new Map();
 io.on("connection", (socket) => {
-  global.chatSocket = socket;
+  console.log('New client connected');
+
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
   });
@@ -61,7 +62,19 @@ io.on("connection", (socket) => {
   socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+      io.to(sendUserSocket).emit("msg-receive", { msg: data.msg, to: data.to });
     }
+  });
+
+
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+    // Remove the disconnected user from the onlineUsers map
+    onlineUsers.forEach((value, key) => {
+      if (value === socket.id) {
+        onlineUsers.delete(key);
+      }
+    });
   });
 });

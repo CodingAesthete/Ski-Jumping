@@ -25,13 +25,15 @@ export default function ChatContainer({ currentChat, socket }) {
         });
         const data = await response.json();
         setMessages(data);
-        console.log("Messages:", messages);
+        //console.log("Messages:", data); // Update this line to log 'data' instead of 'messages'
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
     };
+
     fetchData();
-  }, [currentChat]);
+  }, [currentChat, messages]); // Add 'messages' to the dependency array
+
 
   useEffect(() => {
     const getCurrentChat = async () => {
@@ -63,30 +65,37 @@ export default function ChatContainer({ currentChat, socket }) {
 
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
-    console.log(msg);
     setMessages(msgs);
   };
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
-        console.log(msg);
-        setArrivalMessage({ fromSelf: false, message: msg });
+      console.log("Setting up event listener for msg-receive");
+      socket.current.on("msg-receive", (msg) => {
+        console.log("Received message:", msg);
+        if (msg.to === currentChat._id) {
+          setArrivalMessage({ fromSelf: false, message: msg.msg });
+        }
       });
     }
-  }, []);
+
+    return () => {
+      if (socket.current) {
+        socket.current.off("msg-receive");
+      }
+    };
+  }, [currentChat]);
 
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
+  const handleClick = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "instant" });
+  }
 
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <div className="chat-header">
         <div className="user-details">
           <div className="avatar">
