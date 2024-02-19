@@ -17,6 +17,8 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showPostsError, setShowPostsError] = useState(false);
+  const [userPosts, setUserPosts] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -107,6 +109,38 @@ export default function Profile() {
     }
   };
 
+  const handleShowPosts = async () => {
+    try {
+      setShowPostsError(false);
+      const res = await fetch(`/api/user/posts/${currentUser._id}`);
+      const data = await res.json();
+      console.log(data);
+
+      setUserPosts(data);
+    } catch (error) {
+      setShowPostsError(true);
+    }
+  };
+
+  const handleUsersDelete = async (postId) => {
+    try {
+      const res = await fetch(`/api/post/delete/${postId}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        console.log(data.message);
+        return;
+      }
+
+      setUserPosts((prev) =>
+        prev.filter((post) => post._id !== postId)
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-2'>Profile</h1>
@@ -168,6 +202,13 @@ export default function Profile() {
           style={{ letterSpacing: '2px' }}>
           Messages
         </Link>
+        <Link to={'/post'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
+          style={{ letterSpacing: '2px' }}>
+          Publish
+        </Link>
+        <Link onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 ' style={{ letterSpacing: '2px' }}>
+          Posts
+        </Link>
         <span
           onClick={handleSignOut}
           className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Sign out</span>
@@ -177,6 +218,40 @@ export default function Profile() {
       <p className='text-green-700 bg-blue-50 bg-opacity-60 px-2 font-bold mt-5'>
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
+
+      {userPosts && userPosts.length > 0 && (
+        <div className='flex flex-col gap-4 bg-sky-100 bg-opacity-80 rounded-md pb-3'>
+          <h1 className='text-center mt-4 text-2xl font-semibold'>
+            Your Posts
+          </h1>
+          {userPosts.map((post) => (
+            <div
+              key={post._id}
+              className='border rounded-lg p-2 flex justify-between items-center gap-6'
+            >
+              <Link >
+                <img
+                  src={post.image}
+                  alt='listing cover'
+                  className=' w-36 object-contain'
+                />
+              </Link>
+              <Link
+                className='text-slate-700 font-semibold  hover:underline truncate flex-1'
+              > <p>{post.title}</p>
+              </Link>
+              <div className='flex flex-col item-center'>
+                <button
+                  onClick={() => handleUsersDelete(post._id)}
+                  className='text-red-700 uppercase'
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div >
   )
 }

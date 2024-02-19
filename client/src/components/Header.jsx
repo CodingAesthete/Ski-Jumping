@@ -20,7 +20,7 @@ export default function Header() {
         </Link>
         <ul className='flex items-center gap-0 sm:gap-8 text-lg lg:text-2xl xl:text-xl sm:whitespace-nowrap'>
           <Link to='/'>
-            <li className='hidden lg:inline hover:underline cursor-pointer'>Home</li>
+            <li className='hidden lg:inline hover:underline cursor-pointer'>Newsfeed</li>
           </Link>
           <Link to='/world-cup'>
             <li className='hidden sm:inline hover:underline'> World Cup</li>

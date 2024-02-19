@@ -11,6 +11,7 @@ import WorldCup from './pages/WorldCup';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import Chat from './pages/Chat';
+import CreatePost from './pages/CreatePost';
 export default function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
           <Route path='/chat' element={<Chat />} />
+          <Route path="/post" element={<CreatePost />} />
         </Route>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />

@@ -1,6 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
+import Post from '../models/post.model.js';
 
 export const test = (req, res) => {
   res.json({
@@ -66,3 +67,12 @@ export const deleteUser = async (req, res, next) => {
     next(err);
   }
 }
+
+export const getUserPosts = async (req, res, next) => {
+  try {
+    const posts = await Post.find({ userRef: req.params.id });
+    res.status(200).json(posts);
+  } catch (error) {
+    next(error);
+  }
+};

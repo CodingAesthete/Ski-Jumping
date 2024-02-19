@@ -13,6 +13,14 @@ const postSchema = new mongoose.Schema(
     image: {
       type: String,
       required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    userRef: {
+      type: String,
+      required: true
     }
   }, { timestamps: true });
 
