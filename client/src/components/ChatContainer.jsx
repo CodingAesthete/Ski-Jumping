@@ -25,14 +25,14 @@ export default function ChatContainer({ currentChat, socket }) {
         });
         const data = await response.json();
         setMessages(data);
-        //console.log("Messages:", data); // Update this line to log 'data' instead of 'messages'
+        console.log("Messages:", data);
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
     };
 
     fetchData();
-  }, [currentChat, messages]); // Add 'messages' to the dependency array
+  }, [currentChat, messages]);
 
 
   useEffect(() => {
