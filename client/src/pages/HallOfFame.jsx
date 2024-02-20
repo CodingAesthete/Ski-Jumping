@@ -114,8 +114,10 @@ export default function HallOfFame() {
       {top10jumpers.map((jumper, index) => (
         <div key={index} className="flex items-center justify-between p-4 border-b border-black py-6 leading-7">
           <div className="flex w-full items-center">
-            <div className='w-4/12'>
+            <div className='w-4/12' style={{ position: 'relative' }}>
               <img src={jumper.img} alt="" className="w-3/4 mr-4" />
+              <div className='bg-black text-white text-lg font-semibold w-8 h-8 flex items-center justify-center rounded-full' style={{ position: 'absolute', top: '6px', left: '6px' }}>{index + 1}</div>
+              <div className='w-3/4 text-center mt-2 font-semibold text-lg italic bg-purple-800 text-white' style={{ letterSpacing: '0.15rem' }}>{jumper.wins} wins</div>
             </div>
             <div className='w-8/12'>
               <div className="flex items-center">
