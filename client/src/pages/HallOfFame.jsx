@@ -1,4 +1,5 @@
 import React from 'react'
+import { motion } from 'framer-motion';
 
 export default function HallOfFame() {
   const top10jumpers = [
@@ -112,27 +113,66 @@ export default function HallOfFame() {
   return (
     <div className='bg-slate-100 bg-opacity-90 w-2/3 my-4 rounded-md mx-auto mb-8'>
       {top10jumpers.map((jumper, index) => (
-        <div key={index} className="flex items-center justify-between p-4 border-b border-black py-6 leading-7">
+        <motion.div
+          key={index}
+          className="flex items-center justify-between p-4 border-b border-black py-6 leading-7"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
           <div className="flex w-full items-center">
             <div className='w-4/12' style={{ position: 'relative' }}>
-              <img src={jumper.img} alt="" className="w-3/4 mr-4" />
+              <motion.img
+                src={jumper.img}
+                alt=""
+                className="w-3/4 mr-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+              />
               <div className='bg-black text-white text-lg font-semibold w-8 h-8 flex items-center justify-center rounded-full' style={{ position: 'absolute', top: '6px', left: '6px' }}>{index + 1}</div>
-              <div className='w-3/4 text-center mt-2 font-semibold text-lg italic bg-purple-800 text-white' style={{ letterSpacing: '0.15rem' }}>{jumper.wins} wins</div>
+              <motion.div
+                className='w-3/4 text-center mt-2 font-semibold text-lg italic bg-purple-800 text-white'
+                style={{ letterSpacing: '0.15rem' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {jumper.wins} wins
+              </motion.div>
             </div>
-            <div className='w-8/12'>
-              <div className="flex items-center">
-                <img src={`https://flagcdn.com/24x18/${jumper.country}.png`} alt={jumper.country} className="mr-2" />
-                <div className="font-semibold text-lg italic">{jumper.name}</div>
-              </div>
-              <div className="text-md">{jumper.desc}</div>
-            </div>
+            <motion.div className='w-8/12' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: index * 0.1 + 0.5 }}>
+              <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}>
+                <div className="flex items-center">
+                  <motion.img
+                    src={`https://flagcdn.com/24x18/${jumper.country}.png`}
+                    alt={jumper.country}
+                    className="mr-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.1 + 0.5 }}
+                  />
+                  <motion.div
+                    className="font-semibold text-lg italic"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: index * 0.1 + 0.5 }}
+                  >
+                    {jumper.name}
+                  </motion.div>
+                </div>
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: index * 0.1 + 0.7, duration: 0.5 }}
+                >
+                  <div className="text-md">{jumper.desc}</div>
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       ))}
     </div>
-  )
-
-
-
-
+  );
 }
