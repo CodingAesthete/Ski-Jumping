@@ -198,16 +198,16 @@ export default function Profile() {
         <span
           onClick={handleDeleteUser}
           className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Delete account</span>
-        <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
-          style={{ letterSpacing: '2px' }}>
-          Messages
-        </Link>
         <Link to={'/post'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
           style={{ letterSpacing: '2px' }}>
-          Publish
+          Post
         </Link>
         <Link onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 ' style={{ letterSpacing: '2px' }}>
-          Posts
+          Blog
+        </Link>
+        <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
+          style={{ letterSpacing: '2px' }}>
+          Message
         </Link>
         <span
           onClick={handleSignOut}

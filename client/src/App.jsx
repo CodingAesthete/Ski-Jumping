@@ -6,8 +6,8 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
-import SkiJumpers from './pages/SkiJumpers';
-import WorldCup from './pages/WorldCup';
+import LearnMore from './pages/LearnMore';
+import Ranking from './pages/Ranking';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import Chat from './pages/Chat';
@@ -27,8 +27,8 @@ export default function App() {
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/hall-of-fame" element={<HallOfFame />} />
-        <Route path="/ski-jumpers" element={<SkiJumpers />} />
-        <Route path="/world-cup" element={<WorldCup />} />
+        <Route path="/learn-more" element={<LearnMore />} />
+        <Route path="/ranking" element={<Ranking />} />
       </Routes>
     </BrowserRouter>
   )

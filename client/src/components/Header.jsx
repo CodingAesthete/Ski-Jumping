@@ -22,11 +22,11 @@ export default function Header() {
           <Link to='/'>
             <li className='hidden lg:inline hover:underline cursor-pointer'>Newsfeed</li>
           </Link>
-          <Link to='/world-cup'>
-            <li className='hidden sm:inline hover:underline'> World Cup</li>
+          <Link to='/ranking'>
+            <li className='hidden sm:inline hover:underline'> Ranking</li>
           </Link>
-          <Link to='/ski-jumpers'>
-            <li className='hidden lg:inline hover:underline'> Ski Jumpers</li>
+          <Link to='/learn-more'>
+            <li className='hidden lg:inline hover:underline'> Learn More</li>
           </Link>
           <Link to='/hall-of-fame'>
             <li className='hidden xl:inline hover:underline'> Hall Of Fame</li>

@@ -4,7 +4,7 @@ export default function PostItem({ post }) {
   return (
     <div className="entry mx-auto lg:w-10/12 flex flex-col mb-6 mt-6 gap-6">
       <div className='w-3/4 mx-auto mt-1'>
-        <img src={post.image} alt="jumper" className="w-full h-auto" />
+        <img src={post.image} alt="jumper" className="w-full h-auto rounded-sm" />
       </div>
       <div className=''>
         <h2 className='text-xl font-bold mb-1 italic text-center'>{post.title}</h2>
