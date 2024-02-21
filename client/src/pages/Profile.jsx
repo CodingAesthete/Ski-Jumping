@@ -202,7 +202,7 @@ export default function Profile() {
           style={{ letterSpacing: '2px' }}>
           Post
         </Link>
-        <Link onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl ' style={{ letterSpacing: '2px' }}>
+        <Link to={'/'} onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl ' style={{ letterSpacing: '2px' }}>
           Blog
         </Link>
         <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl"
