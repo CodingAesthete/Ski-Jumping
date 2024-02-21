@@ -45,7 +45,7 @@ export default function Chat() {
         <div className="container">
           <Contacts contacts={contacts} changeChat={handleChatChange} />
           {currentChat === undefined ? (
-            <Welcome />
+            <Welcome className='welcome' />
           ) : (
             <ChatContainer currentChat={currentChat} socket={socket} />
           )}
@@ -66,6 +66,14 @@ height: 80vh;
   align-items: center;
   background-color: rgb(92, 92, 214);
   opacity:90%;
+  @media screen and (min-width: 720px) and (max-width: 1080px) {
+    width:96vw;
+    margin-bottom:0.5rem;
+  }
+  @media screen and (min-width: 375px) and (max-width: 719px) {
+    width:96vw;
+    margin-bottom:0.5rem;
+  }
   .container {
     border-radius:0.5rem;
     height: 69vh;
@@ -75,6 +83,13 @@ height: 80vh;
     grid-template-columns: 30% 70%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;
+      width:96vw;
+    }
+    @media screen and (min-width: 375px) and (max-width: 719px) {
+      display:flex;
+      flex-direction:column-reverse;
+      width:96vw;
+      height:86vh;
     }
   }
 `;

@@ -127,7 +127,7 @@ export default function CreatePost() {
 
 
   return (
-    <main className='p-6 mt-6 mx-auto max-w-[58rem] m-[1.5rem] bg-gray-100 bg-opacity-90 rounded-lg mb-8'>
+    <main className='p-6 mt-6 mx-auto sm:max-w-[40rem] md:max-w-[48rem] lg:max-w-[58rem] m-[1.5rem] bg-gray-100 bg-opacity-90 rounded-lg mb-8'>
       <h1 className='text-3xl font-semibold text-center mb-7'>
         Create a Post
       </h1>
@@ -157,7 +157,7 @@ export default function CreatePost() {
           <p className='font-semibold'>Images:
             <span className='font-normal text-gray-600 ml-2'>Choose an image for your post.</span>
           </p>
-          <div className="flex gap-4">
+          <div className="flex sm:flex-col md:flex-row gap-4">
             <input
               className='p-3 border border-gray-300 rounded w-full'
               type="file"

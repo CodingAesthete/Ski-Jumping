@@ -239,47 +239,47 @@ export default function Ranking() {
   return (
     <div className='mx-auto my-6 rounded-md w-full'>
       <div className='bg-purple-300 bg-opacity-90 rounded-lg w-5/12 mx-auto mb-6'>
-        <h1 className='text-center py-2 my-2 text-2xl font-bold'>World Cup 2024</h1>
+        <h1 className='text-center py-2 my-2 px-2 sm:px-0 text-lg sm:text-2xl 2xl:text-4xl font-bold'>World Cup 2024</h1>
       </div>
-      <div className='flex flex-row justify-between w-full'>
-        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md w-2/5 ml-20'>
-          <h2 className='text-center mb-2 text-xl font-bold italic'>Men's Ranking</h2>
-          <table className='w-full'>
+      <div className='flex flex-col sm:flex-col gap-4 sm:gap-8 lg:gap-0 lg:flex-row justify-between w-full'>
+        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md sm:w-3/4 lg:w-2/5 sm:mx-auto lg:ml-20'>
+          <h2 className='text-center mb-2 text-lg sm:text-xl 2xl:text-3xl font-bold italic'>Men's Ranking</h2>
+          <table className='w-full fade-in'>
             <thead className='text-justify'>
-              <tr className='text-blue-800'>
+              <tr className='text-blue-800 2xl:text-2xl'>
                 <th className='text-center pr-1'>Rank</th>
-                <th className='text-center'>Name</th> {/* Adjusted left padding */}
+                <th className='text-center'>Name</th>
+                <th className='pr-2'>Country</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody className='text-justify 2xl:mt-10'>
+              {top50MenSkiJumpers.map((athlete, index) => (
+                <tr key={index} className=' text-md sm:text-lg 2xl:text-2xl 2xl:leading-9 font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
+                  <td className='text-center'>{index + 1}.</td>
+                  <td>{athlete.name}</td>
+                  <td className='pl-4'><img src={`https://flagcdn.com/24x18/${countryCodes[athlete.country]}.png`} alt={athlete.country} /></td>
+                  <td>{athlete.points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md lg:w-5/12 sm:w-3/4 sm:mx-auto lg:mr-20'>
+          <h2 className='text-center mb-2 text-xl font-bold italic 2xl:text-3xl'>Women's Ranking</h2>
+          <table className='w-full fade-in'>
+            <thead className='text-justify'>
+              <tr className='text-blue-800 2xl:text-2xl'>
+                <th className='text-center pr-1'>Rank</th>
+                <th className='text-center'>Name</th>
                 <th className='pr-2'>Country</th>
                 <th>Points</th>
               </tr>
             </thead>
             <tbody className='text-justify'>
-              {top50MenSkiJumpers.map((athlete, index) => (
-                <tr key={index} className='text-lg font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
-                  <td className='text-center'>{index + 1}.</td>
-                  <td>{athlete.name}</td>
-                  <td className='pl-4'><img src={`https://flagcdn.com/24x18/${countryCodes[athlete.country]}.png`} alt={athlete.country} /></td>
-                  <td>{athlete.points}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md w-5/12 lg:mr-20'>
-          <h2 className='text-center mb-2 text-xl font-bold italic'>Women's Ranking</h2>
-          <table className='w-full'>
-            <thead className='text-justify'>
-              <tr className='text-blue-800'>
-                <th className='text-center pr-1'>Rank</th>
-                <th className='text-center'>Name</th> {/* Adjusted left padding */}
-                <th className='pr-2'>Country</th> {/* Adjusted right padding */}
-                <th>Points</th>
-              </tr>
-            </thead>
-            <tbody className='text-justify'>
               {top50WomenSkiJumpers.map((athlete, index) => (
-                <tr key={index} className='text-lg font-semibold font-mono ' style={{ lineHeight: '1.77' }}>
+                <tr key={index} className='text-md sm:text-lg 2xl:text-2xl 2xl:leading-9 font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
                   <td className='text-center'>{index + 1}.</td>
                   <td>{athlete.name}</td>
                   <td className='pl-4'><img src={`https://flagcdn.com/24x18/${countryCodes[athlete.country]}.png`} alt={athlete.country} /></td>
@@ -290,24 +290,25 @@ export default function Ranking() {
           </table>
         </div>
       </div>
-      <div className='bg-purple-300 bg-opacity-90 rounded-lg w-5/12 mx-auto mb-6'>
-        <h1 className='text-center py-2 my-2 text-2xl font-bold mt-16'>Continental Cup 2024</h1>
+
+      <div className='bg-purple-300 bg-opacity-90 rounded-lg w-7/12 sm:w-5/12 mx-auto mb-6'>
+        <h1 className='text-center py-2 my-2 text-lg sm:text-2xl font-bold mt-16 2xl:text-4xl'>Continental Cup 2024</h1>
       </div>
-      <div className='flex flex-row justify-between w-full'>
-        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md w-2/5 ml-20'>
-          <h2 className='text-center mb-2 text-xl font-bold italic'>Men's Ranking</h2>
-          <table className='w-full'>
+      <div className='flex flex-col gap-4 sm:flex-col sm:gap-8 lg:gap-0 lg:flex-row justify-between w-full'>
+        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md sm:w-3/4 lg:w-2/5 sm:mx-auto lg:ml-20'>
+          <h2 className='text-center mb-2 text-xl 2xl:text-3xl font-bold italic'>Men's Ranking</h2>
+          <table className='w-full fade-in'>
             <thead className='text-justify'>
-              <tr className='text-blue-800'>
+              <tr className='text-blue-800 2xl:text-2xl'>
                 <th className='text-center pr-1'>Rank</th>
-                <th className='text-center'>Name</th> {/* Adjusted left padding */}
-                <th className='pr-2'>Country</th> {/* Adjusted right padding */}
+                <th className='text-center'>Name</th>
+                <th className='pr-2'>Country</th>
                 <th>Points</th>
               </tr>
             </thead>
             <tbody className='text-justify'>
               {top50MenSkiJumpersCont.map((athlete, index) => (
-                <tr key={index} className='text-lg font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
+                <tr key={index} className='text-md sm:text-lg 2xl:text-2xl 2xl:leading-9 font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
                   <td className='text-center'>{index + 1}.</td>
                   <td>{athlete.name}</td>
                   <td className='pl-4'><img src={`https://flagcdn.com/24x18/${countryCodes[athlete.country]}.png`} alt={athlete.country} /></td>
@@ -318,20 +319,20 @@ export default function Ranking() {
           </table>
         </div>
 
-        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md w-5/12 lg:mr-20'>
-          <h2 className='text-center mb-2 text-xl font-bold italic'>Women's Ranking</h2>
-          <table className='w-full'>
+        <div className='bg-gray-200 bg-opacity-90 p-4 rounded-md lg:w-5/12 sm:w-3/4 sm:mx-auto lg:mr-20'>
+          <h2 className='text-center mb-2 text-xl font-bold italic 2xl:text-3xl'>Women's Ranking</h2>
+          <table className='w-full fade-in'>
             <thead className='text-justify'>
-              <tr className='text-blue-800'>
+              <tr className='text-blue-800 2xl:text-2xl'>
                 <th className='text-center pr-1'>Rank</th>
-                <th className='text-center'>Name</th> {/* Adjusted left padding */}
-                <th className='pr-2'>Country</th> {/* Adjusted right padding */}
+                <th className='text-center'>Name</th>
+                <th className='pr-2'>Country</th>
                 <th>Points</th>
               </tr>
             </thead>
             <tbody className='text-justify'>
               {top50WomenSkiJumpersCont.map((athlete, index) => (
-                <tr key={index} className='text-lg font-semibold font-mono ' style={{ lineHeight: '1.77' }}>
+                <tr key={index} className='text-md sm:text-lg 2xl:text-2xl 2xl:leading-9 font-semibold font-mono ' style={{ lineHeight: '1.77' }} >
                   <td className='text-center'>{index + 1}.</td>
                   <td>{athlete.name}</td>
                   <td className='pl-4'><img src={`https://flagcdn.com/24x18/${countryCodes[athlete.country]}.png`} alt={athlete.country} /></td>
@@ -342,6 +343,7 @@ export default function Ranking() {
           </table>
         </div>
       </div>
-    </div >
+    </div>
   );
+
 }

@@ -97,7 +97,7 @@ export default function ChatContainer({ currentChat, socket }) {
   return (
     <Container onClick={handleClick}>
       <div className="chat-header">
-        <div className="user-details">
+        <div className=" user-details">
           <div className="avatar">
             <img
               src={currentChat.avatar}
@@ -125,21 +125,24 @@ export default function ChatContainer({ currentChat, socket }) {
           );
         })}
       </div>
-      <ChatInput handleSendMsg={handleSendMsg} />
+      <ChatInput className='chat-input' handleSendMsg={handleSendMsg} />
     </Container>
   )
 }
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 74.5% 15.5%;
+  grid-template-rows: auto 1fr auto; /* Adjusted rows to allow automatic height for header and input */
   gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
   }
+  @media screen and (min-width: 375px) and (max-width: 719px) {
+    max-height: 60vh;
+  }
   .chat-header {
-    z-index:100;
+    z-index: 100;
     border-radius: 0 0.5rem 0 0;
     font-size: 1.02rem;
     background-color: rgb(0, 60, 149);
@@ -147,15 +150,17 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 1.75rem 2rem;
+    margin-bottom: 0; /* Remove bottom margin */
     .user-details {
       display: flex;
       align-items: center;
       gap: 1rem;
+      
       .avatar {
         img {
           height: 2.5rem;
-          width:2.5rem;
-          border-radius:100%;
+          width: 2.5rem;
+          border-radius: 100%;
         }
       }
       .username {
@@ -187,11 +192,16 @@ const Container = styled.div`
         overflow-wrap: break-word;
         padding: 1rem;
         font-size: 1.1rem;
-        font-weight:600;
+        font-weight: 600;
         border-radius: 1rem;
-        color:white;
+        color: white;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
+          font-size: 0.9rem;
+        }
+        @media screen and (min-width: 375px) and (max-width: 719px) {
+          max-width: 70%;
+          font-size: 0.9rem;
         }
       }
     }
@@ -206,6 +216,16 @@ const Container = styled.div`
       .content {
         background-color: rgb(0, 115, 230);
       }
+    }
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 719px) {
+    .chat-input {
+      margin-top: auto; /* This will push the chat input to the bottom */
+    }
+
+    .chat-header{
+      display:none;
     }
   }
 `;

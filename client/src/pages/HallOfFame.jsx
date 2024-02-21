@@ -111,17 +111,17 @@ export default function HallOfFame() {
   ]
 
   return (
-    <div className='bg-slate-100 bg-opacity-90 w-2/3 my-4 rounded-md mx-auto mb-8'>
+    <div className='bg-slate-100 bg-opacity-90 w-5/6 sm:w-5/6 md:w-2/3 my-4 rounded-md mx-auto mb-8'>
       {top10jumpers.map((jumper, index) => (
         <motion.div
           key={index}
-          className="flex items-center justify-between p-4 border-b border-black py-6 leading-7"
+          className="flex items-center justify-between p-4 lg:p-3 border-b border-black py-6 leading-7 lg:py-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
         >
-          <div className="flex w-full items-center">
-            <div className='w-4/12' style={{ position: 'relative' }}>
+          <div className="flex flex-col sm:flex-col lg:flex-row w-full items-center">
+            <div className=' w-11/12 flex flex-col items-center justify-center sm:w-11/12 sm:flex sm:flex-col sm:items-center sm:justify-center  lg:w-6/12' style={{ position: 'relative' }}>
               <motion.img
                 src={jumper.img}
                 alt=""
@@ -141,9 +141,9 @@ export default function HallOfFame() {
                 {jumper.wins} wins
               </motion.div>
             </div>
-            <motion.div className='w-8/12' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: index * 0.1 + 0.5 }}>
+            <motion.div className='w-11/12 sm:w-11/12 lg:w-6/12' initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: index * 0.1 + 0.5 }}>
               <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}>
-                <div className="flex items-center">
+                <div className="flex items-center justify-center sm:justify-center md:justify-start sm:pt-2">
                   <motion.img
                     src={`https://flagcdn.com/24x18/${jumper.country}.png`}
                     alt={jumper.country}
@@ -153,7 +153,7 @@ export default function HallOfFame() {
                     transition={{ delay: index * 0.1 + 0.5 }}
                   />
                   <motion.div
-                    className="font-semibold text-lg italic"
+                    className="font-semibold text-lg 2xl:text-3xl italic"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: index * 0.1 + 0.5 }}
@@ -166,7 +166,7 @@ export default function HallOfFame() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: index * 0.1 + 0.7, duration: 0.5 }}
                 >
-                  <div className="text-md">{jumper.desc}</div>
+                  <div className="text-md 2xl:text-2xl 2xl:leading-9 text-justify sm:text-justify sm:pr-3">{jumper.desc}</div>
                 </motion.div>
               </motion.div>
             </motion.div>

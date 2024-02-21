@@ -142,8 +142,8 @@ export default function Profile() {
   };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-2'>Profile</h1>
+    <div className='p-3 max-w-lg mx-auto 2xl:max-w-2xl'>
+      <h1 className='text-3xl 2xl:text-5xl font-semibold text-center my-2 2xl:my-4'>Profile</h1>
       <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
         <input
           onChange={(e) => setFile(e.target.files[0])}
@@ -156,16 +156,16 @@ export default function Profile() {
           onClick={() => fileRef.current.click()}
           src={formData.avatar || currentUser.avatar}
           alt="profile"
-          className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2' />
+          className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2 2xl:h-36 2xl:w-36' />
         <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700 bg-blue-50 bg-opacity-80'>
               Error Image upload (image must be less than 2 mb)
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
-            <span className='text-slate-700 bg-blue-50 bg-opacity-90 p-2 font-bold'>{`Uploading ${filePerc}%`}</span>
+            <span className='text-slate-700 bg-blue-50 bg-opacity-90 p-2 font-bold 2xl:text-lg'>{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className='text-green-700 bg-blue-50 bg-opacity-90 p-2 font-bold'>Image successfully uploaded!</span>
+            <span className='text-green-700 bg-blue-50 bg-opacity-90 p-2 font-bold 2xl:text-lg'>Image successfully uploaded!</span>
           ) : (
             ''
           )}
@@ -174,44 +174,44 @@ export default function Profile() {
           type="text"
           placeholder='username'
           id='username'
-          className='border p-3 rounded-lg'
+          className='border p-3 rounded-lg 2xl:text-2xl 2xl:p-5'
           onChange={handleChange}
           defaultValue={currentUser.username} />
         <input
           type="email"
           placeholder='email'
           id='email'
-          className='border p-3 rounded-lg'
+          className='border p-3 rounded-lg 2xl:text-2xl 2xl:p-5'
           onChange={handleChange}
           defaultValue={currentUser.email} />
         <input
           type="password"
           placeholder='password'
           id='password'
-          className='border p-3 rounded-lg'
+          className='border p-3 rounded-lg 2xl:text-2xl 2xl:p-5'
           onChange={handleChange} />
         <button
-          className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 mt-1'>{loading ? 'Loading...' : 'update'}</button>
+          className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80 mt-1 2xl:text-2xl 2xl:p-5'>{loading ? 'Loading...' : 'update'}</button>
 
       </form>
-      <div className="flex justify-between mt-7">
+      <div className="w-3/4 p-3 sm:p-0 sm:w-full flex flex-col mx-auto text-center sm:text-start gap-3 sm:gap-0 sm:flex-row justify-between mt-7">
         <span
           onClick={handleDeleteUser}
-          className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Delete account</span>
-        <Link to={'/post'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
+          className='text-red-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1 2xl:text-2xl'>Delete account</span>
+        <Link to={'/post'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl"
           style={{ letterSpacing: '2px' }}>
           Post
         </Link>
-        <Link onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 ' style={{ letterSpacing: '2px' }}>
+        <Link onClick={handleShowPosts} className=' bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl ' style={{ letterSpacing: '2px' }}>
           Blog
         </Link>
-        <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800"
+        <Link to={'/chat'} className="bg-blue-50 bg-opacity-70 font-bold cursor-pointer px-2 py-1 text-green-800 2xl:text-2xl"
           style={{ letterSpacing: '2px' }}>
           Message
         </Link>
         <span
           onClick={handleSignOut}
-          className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1'>Sign out</span>
+          className='text-blue-700 bg-blue-50 bg-opacity-60 text-md font-bold cursor-pointer px-2 py-1 2xl:text-2xl'>Sign out</span>
       </div>
 
       <p className='text-red-900 mt-5'>{error ? error : ''}</p>

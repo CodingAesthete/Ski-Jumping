@@ -20,7 +20,7 @@ export default function ChatInput({ handleSendMsg }) {
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
-          placeholder="type your message here"
+          placeholder="type your message "
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
         />
@@ -42,6 +42,9 @@ border-radius: 0 0 0.5rem 0;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
     gap: 1rem;
+  }
+  @media screen and (min-width: 375px) and (max-width: 719px) {
+    min-height:3.5rem;
   }
   .button-container {
     display: flex;
