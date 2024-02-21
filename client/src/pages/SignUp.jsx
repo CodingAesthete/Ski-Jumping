@@ -78,7 +78,7 @@ export default function SignUp() {
         >
           {loading ? 'Loading' : 'Sign up'}
         </button>
-        <OAuth />
+        {/* <OAuth /> */}
       </form>
       <div className='flex gap-2 mt-5 font-bold tracking-wide text-md bg-blue-50 bg-opacity-30 px-3'>
         <p>Have an account?</p>

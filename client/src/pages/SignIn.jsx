@@ -68,7 +68,7 @@ export default function SignIn() {
         >
           {loading ? 'Loading...' : 'Sign in'}
         </button>
-        <OAuth />
+        {/* <OAuth /> */}
       </form>
       <div className='flex gap-2 mt-5 font-bold tracking-wide text-md bg-blue-50 bg-opacity-70 px-3'>
         <p>No account?</p>
