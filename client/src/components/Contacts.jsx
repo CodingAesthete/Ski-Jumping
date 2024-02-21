@@ -165,9 +165,6 @@ border-radius:0.5rem 0 0 0.5rem;
     .current-user {
       display: none;
     }
-  }
-
-  @media screen and (min-width: 375px) and (max-width: 719px) {
     .contacts {
       max-height: 7rem;
       margin-top:0.5rem;

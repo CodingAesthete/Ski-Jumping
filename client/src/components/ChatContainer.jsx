@@ -9,6 +9,19 @@ export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [canScroll, setCanScroll] = useState(true); // State to control scrolling
+
+  const scrollToBottom = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "auto" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToTop = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,7 +46,6 @@ export default function ChatContainer({ currentChat, socket }) {
 
     fetchData();
   }, [currentChat, messages]);
-
 
   useEffect(() => {
     const getCurrentChat = async () => {
@@ -66,6 +78,7 @@ export default function ChatContainer({ currentChat, socket }) {
     const msgs = [...messages];
     msgs.push({ fromSelf: true, message: msg });
     setMessages(msgs);
+    scrollToBottom(); // Scroll to bottom after sending message
   };
 
   useEffect(() => {
@@ -87,15 +100,25 @@ export default function ChatContainer({ currentChat, socket }) {
   }, [currentChat]);
 
   useEffect(() => {
-    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+    if (arrivalMessage) {
+      setMessages((prev) => [...prev, arrivalMessage]);
+      setArrivalMessage(null); // Clear arrivalMessage after adding it to messages
+      scrollToBottom(); // Scroll to bottom after receiving message
+    }
   }, [arrivalMessage]);
 
-  const handleClick = () => {
-    scrollRef.current?.scrollIntoView({ behavior: "instant" });
-  }
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    if (scrollTop === 0 && canScroll) {
+      setCanScroll(шике); // Disable automatic scrolling
+      scrollToTop(); // Load older messages
+    } else if (scrollTop + clientHeight === scrollHeight) {
+      setCanScroll(true); // Enable automatic scrolling
+    }
+  };
 
   return (
-    <Container onClick={handleClick}>
+    <Container>
       <div className="chat-header">
         <div className=" user-details">
           <div className="avatar">
@@ -109,10 +132,10 @@ export default function ChatContainer({ currentChat, socket }) {
           </div>
         </div>
       </div>
-      <div className="chat-messages">
+      <div className="chat-messages" onScroll={handleScroll}>
         {messages.map((message) => {
           return (
-            <div ref={scrollRef} key={uuidv4()}>
+            <div key={uuidv4()}>
               <div
                 className={`message ${message.fromSelf ? "sended" : "recieved"
                   }`}
@@ -124,6 +147,7 @@ export default function ChatContainer({ currentChat, socket }) {
             </div>
           );
         })}
+        <div ref={scrollRef}></div>
       </div>
       <ChatInput className='chat-input' handleSendMsg={handleSendMsg} />
     </Container>
@@ -132,7 +156,7 @@ export default function ChatContainer({ currentChat, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto; /* Adjusted rows to allow automatic height for header and input */
+  grid-template-rows: 10% 74.5% 15.5%;
   gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
@@ -140,6 +164,7 @@ const Container = styled.div`
   }
   @media screen and (min-width: 375px) and (max-width: 719px) {
     max-height: 60vh;
+    grid-template-rows: auto 1fr auto;
   }
   .chat-header {
     z-index: 100;
@@ -150,7 +175,6 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 1.75rem 2rem;
-    margin-bottom: 0; /* Remove bottom margin */
     .user-details {
       display: flex;
       align-items: center;

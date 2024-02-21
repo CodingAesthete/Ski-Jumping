@@ -8,6 +8,7 @@ import authRouter from './routes/auth.route.js';
 import postRouter from './routes/post.route.js'
 import messageRouter from './routes/messages.route.js';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 dotenv.config();
 
@@ -19,6 +20,8 @@ mongoose
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
   });
+
+const __dirname = path.resolve();
 
 const app = express();
 app.use(cors());
@@ -42,6 +45,12 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/messages', messageRouter);
 app.use('/api/post', postRouter);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
