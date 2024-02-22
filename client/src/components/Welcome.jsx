@@ -17,6 +17,7 @@ export default function Welcome() {
 }
 
 const Container = styled.div`
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,5 +40,8 @@ const Container = styled.div`
   }
   h3{
     font-weight: 500;
+  }
+  @media screen and (min-width: 375px) and (max-width: 719px) {
+    height:70vh;
   }
 `;
