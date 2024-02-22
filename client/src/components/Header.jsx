@@ -36,7 +36,7 @@ export default function Header() {
             <li className='inline hover:underline cursor-pointer'>{isSmallScreen ? <img className=' mr-6 w-11 h-11 bg-blue-50 rounded-full' src="https://cdn-icons-png.flaticon.com/512/10542/10542477.png" alt="home icon" /> : "Newsfeed"}</li>
           </Link>
           <Link to='/ranking'>
-            <li className='inline hover:underline cursor-pointer'>{isSmallScreen ? <img className=' mr-6 w-11 h-11 bg-blue-50 rounded-full' src="https://cdn-icons-png.flaticon.com/512/1803/1803729.png" alt="home icon" /> : "Ranking"}</li>
+            <li className='inline hover:underline cursor-pointer'>{isSmallScreen ? <img className=' mr-6 w-11 h-11 bg-blue-50 rounded-full' src="https://cdn-icons-png.freepik.com/512/3481/3481354.png" alt="home icon" /> : "Ranking"}</li>
           </Link>
           <Link to='/learn-more'>
             <li className='inline hover:underline cursor-pointer'>{isSmallScreen ? <img className=' mr-6 w-11 h-11 bg-blue-50 rounded-full' src="https://cdn2.iconfinder.com/data/icons/education-e-learning/64/LEARN_TO_THINK-512.png" alt="home icon" /> : "Learn More"}</li>
