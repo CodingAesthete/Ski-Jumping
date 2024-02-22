@@ -7,7 +7,7 @@ export default function LearnMore() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="text-lg text-justify w-11/12 sm:w-5/6 mx-auto rounded-md px-4 sm:px-10 py-6 mt-6 mb-10 bg-blue-100"
+      className="text-md text-justify w-11/12 sm:w-5/6 mx-auto rounded-md px-4 sm:px-10 py-6 mt-6 mb-10 bg-blue-100"
     >
       <div>
         <h1 className='w-full text-center text-2xl 2xl:text-4xl font-bold pb-6'>The History of Ski Jumping</h1>
