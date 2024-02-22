@@ -47,7 +47,7 @@ export default function Header() {
           <Link to='/profile'>
             {currentUser ? (
               <img className='rounded-full h-11 w-11 sm:h-11 sm:w-11 lg:h-10 lg:w-10 2xl:h-16 2xl:w-16 object-cover' src={currentUser.avatar} alt='profile' />
-            ) : (<li className='hover:underline'>Sign in</li>)}
+            ) : (<li className='inline hover:underline cursor-pointer'>{isSmallScreen ? <img className=' mr-6 w-11 h-11 bg-blue-50 rounded-full' src="https://icon-library.com/images/customer-login-icon/customer-login-icon-8.jpg" alt="home icon" /> : "Sign In"}</li>)}
           </Link>
         </ul>
       </div>
