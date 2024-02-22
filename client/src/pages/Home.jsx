@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import PostItem from '../components/PostItem';
 import { motion } from "framer-motion";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
+  const { currentUser } = useSelector((state) => state.user);
   const variants = {
     hidden: { opacity: 0, y: -20 },
     visible: { opacity: 1, y: 0 },
@@ -31,6 +34,13 @@ export default function Home() {
       <header>
         <h1 className='font-bold text-3xl 2xl:text-4xl text-center italic font-custom tracking-wide text-violet-900 mt-2 2xl:mt-3'>Newsfeed</h1>
       </header>
+      {currentUser && (
+        <Link className='w-6/12' to="/post">
+          <button className="mt-4 py-2 px-4 bg-blue-700 hover:bg-blue-800 text-white rounded-lg w-full">
+            Create Post
+          </button>
+        </Link>
+      )}
       <div className='mx-auto'>
         {posts && posts.length > 0 && posts.map((post) => (
           <motion.div
