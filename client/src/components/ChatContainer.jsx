@@ -12,17 +12,16 @@ export default function ChatContainer({ currentChat, socket }) {
   const [canScroll, setCanScroll] = useState(true); // State to control scrolling
 
   const scrollToBottom = () => {
-    scrollRef.current?.scrollIntoView({ behavior: "auto" });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
-  const scrollToTop = () => {
-    scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
+  const handleClick = () => {
+    scrollRef.current?.scrollIntoView({ behavior: "instant" });
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,15 +44,6 @@ export default function ChatContainer({ currentChat, socket }) {
     };
 
     fetchData();
-  }, [currentChat, messages]);
-
-  useEffect(() => {
-    const getCurrentChat = async () => {
-      if (currentChat) {
-        await currentUser._id;
-      }
-    };
-    getCurrentChat();
   }, [currentChat]);
 
   const handleSendMsg = async (msg) => {
@@ -107,18 +97,8 @@ export default function ChatContainer({ currentChat, socket }) {
     }
   }, [arrivalMessage]);
 
-  const handleScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    if (scrollTop === 0 && canScroll) {
-      setCanScroll(шике); // Disable automatic scrolling
-      scrollToTop(); // Load older messages
-    } else if (scrollTop + clientHeight === scrollHeight) {
-      setCanScroll(true); // Enable automatic scrolling
-    }
-  };
-
   return (
-    <Container>
+    <Container handleClick={handleClick}>
       <div className="chat-header">
         <div className=" user-details">
           <div className="avatar">
@@ -132,7 +112,7 @@ export default function ChatContainer({ currentChat, socket }) {
           </div>
         </div>
       </div>
-      <div className="chat-messages" onScroll={handleScroll}>
+      <div className="chat-messages">
         {messages.map((message) => {
           return (
             <div key={uuidv4()}>
@@ -149,7 +129,8 @@ export default function ChatContainer({ currentChat, socket }) {
         })}
         <div ref={scrollRef}></div>
       </div>
-      <ChatInput className='chat-input' handleSendMsg={handleSendMsg} />
+      <ChatInput className='chat-input' handleSendMsg={handleSendMsg} handleClick={handleClick} />
+
     </Container>
   )
 }

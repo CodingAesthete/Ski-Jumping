@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 
-export default function ChatInput({ handleSendMsg }) {
+export default function ChatInput({ handleSendMsg, handleClick }) {
   const [msg, setMsg] = useState("");
 
   const sendChat = (event) => {
@@ -23,6 +23,7 @@ export default function ChatInput({ handleSendMsg }) {
           placeholder="type your message "
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
+          onClick={handleClick}
         />
         <button type="submit">
           <IoMdSend />
