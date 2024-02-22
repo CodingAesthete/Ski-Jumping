@@ -125,7 +125,7 @@ export default function HallOfFame() {
               <motion.img
                 src={jumper.img}
                 alt=""
-                className="w-3/4 mr-4"
+                className="w-3/4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: index * 0.1 }}
