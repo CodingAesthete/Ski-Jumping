@@ -111,7 +111,7 @@ export default function HallOfFame() {
   ]
 
   return (
-    <div className='bg-slate-100 bg-opacity-90 w-5/6 sm:w-5/6 md:w-2/3 my-4 rounded-md mx-auto mb-8'>
+    <div className='bg-slate-100 bg-opacity-90 w-full sm:w-5/6 md:w-2/3 my-4 rounded-md mx-auto mb-8'>
       {top10jumpers.map((jumper, index) => (
         <motion.div
           key={index}
