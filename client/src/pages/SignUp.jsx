@@ -20,9 +20,8 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validation: Check if any of the form fields are empty or contain only spaces
     if (Object.values(formData).every(value => !value)) {
-      setError("Please fill in at least one field.");
+      setError("Please fill in the fields.");
       return;
     }
 
@@ -39,21 +38,21 @@ export default function SignUp() {
 
       const data = await res.json();
 
-      if (data.success === false) {
+      if (!res.ok) {
+        setError("This username or password already exists.");
         setLoading(false);
-        setError(data.message);
         return;
       }
+
       setLoading(false);
       setError(null);
       navigate('/sign-in');
 
     } catch (error) {
       setLoading(false);
-      setError(error.message);
+      setError("An error occurred while signing up.");
     }
   }
-
 
   return (
     <div className='p-3 max-w-lg mx-auto' >
@@ -94,7 +93,7 @@ export default function SignUp() {
           <span className='text-blue-900'>Sign in</span>
         </Link>
       </div>
-      {error && <p className='bg-blue-50 bg-opacity-90 text-red-600'>{error}</p>}
+      {error && <p className='my-2 px-3 font-bold bg-blue-50 bg-opacity-90 text-red-600'>{error}</p>}
     </div>
   )
 }
