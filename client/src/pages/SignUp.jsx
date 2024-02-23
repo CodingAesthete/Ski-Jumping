@@ -19,6 +19,13 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation: Check if any of the form fields are empty or contain only spaces
+    if (Object.values(formData).every(value => !value)) {
+      setError("Please fill in at least one field.");
+      return;
+    }
+
     try {
       setLoading(true);
 
@@ -28,7 +35,7 @@ export default function SignUp() {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
-      })
+      });
 
       const data = await res.json();
 
@@ -46,6 +53,7 @@ export default function SignUp() {
       setError(error.message);
     }
   }
+
 
   return (
     <div className='p-3 max-w-lg mx-auto' >
