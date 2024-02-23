@@ -76,7 +76,7 @@ export default function SignIn() {
           <span className='text-red-700'>Sign up</span>
         </Link>
       </div>
-      {error && <p className='bg-blue-50 bg-opacity-90 text-red-600'>{error}</p>}
+      {error && <p className='px-3 my-2 font-bold bg-blue-50 bg-opacity-90 text-red-600'>{error}</p>}
     </div>
   )
 
