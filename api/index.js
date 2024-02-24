@@ -9,8 +9,6 @@ import postRouter from './routes/post.route.js'
 import messageRouter from './routes/messages.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-import cron from 'node-cron';
-import http from 'http';
 
 dotenv.config();
 
@@ -32,23 +30,6 @@ app.use(express.json());
 
 app.use(cookieParser());
 
-app.get('/ping', (req, res) => {
-  res.send('Ping successful');
-});
-
-cron.schedule('*/5 * * * *', () => {
-  http.get('http://localhost:3000/ping', (res) => {
-    console.log('Ping sent');
-    res.on('data', (chunk) => {
-      // Optional: If you want to log the response data
-      console.log(`Response data: ${chunk}`);
-    });
-  }).on('error', (error) => {
-    console.error('Error sending ping:', error);
-  });
-});
-
-
 const server = app.listen(3000, () => {
   console.log('Server is running on port 3000!');
 });
@@ -67,9 +48,13 @@ app.use('/api/post', postRouter);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
+app.get('/keep-alive', (req, res) => {
+  res.send('Server is awake');
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-})
+});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;

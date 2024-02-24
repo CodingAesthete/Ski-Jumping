@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import HallOfFame from './pages/HallOfFame';
@@ -12,15 +12,24 @@ import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import Chat from './pages/Chat';
 import CreatePost from './pages/CreatePost';
-export default function App() {
-  const [pingResponse, setPingResponse] = useState('');
 
+export default function App() {
   useEffect(() => {
-    fetch('/ping')
-      .then(response => response.text())
-      .then(data => setPingResponse(data))
-      .catch(error => console.error('Error fetching ping:', error));
+    // Ping the server every 5 minutes
+    const pingServer = () => {
+      fetch('/keep-alive')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to ping server');
+          }
+        })
+        .catch(error => console.error('Error pinging server:', error));
+    };
+
+    const interval = setInterval(pingServer, 5 * 60 * 1000); // 5 minutes
+    return () => clearInterval(interval); // Clean up the interval on component unmount
   }, []);
+
   return (
     <BrowserRouter>
       <Header />
@@ -39,5 +48,5 @@ export default function App() {
         <Route path="/ranking" element={<Ranking />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
