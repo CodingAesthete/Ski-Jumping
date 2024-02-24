@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import HallOfFame from './pages/HallOfFame';
@@ -13,6 +13,14 @@ import PrivateRoute from './components/PrivateRoute';
 import Chat from './pages/Chat';
 import CreatePost from './pages/CreatePost';
 export default function App() {
+  const [pingResponse, setPingResponse] = useState('');
+
+  useEffect(() => {
+    fetch('/ping')
+      .then(response => response.text())
+      .then(data => setPingResponse(data))
+      .catch(error => console.error('Error fetching ping:', error));
+  }, []);
   return (
     <BrowserRouter>
       <Header />

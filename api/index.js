@@ -9,6 +9,7 @@ import postRouter from './routes/post.route.js'
 import messageRouter from './routes/messages.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cron from 'node-cron';
 
 dotenv.config();
 
@@ -29,6 +30,21 @@ app.use(cors());
 app.use(express.json());
 
 app.use(cookieParser());
+
+app.get('/ping', (req, res) => {
+  res.send('Ping successful');
+});
+
+cron.schedule('*/5 * * * *', () => {
+  axios.get('http://localhost:5000/ping')
+    .then(response => {
+      console.log('Ping sent');
+    })
+    .catch(error => {
+      console.error('Error sending ping:', error);
+    });
+});
+
 
 const server = app.listen(3000, () => {
   console.log('Server is running on port 3000!');
