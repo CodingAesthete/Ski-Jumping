@@ -10,6 +10,7 @@ import messageRouter from './routes/messages.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 import cron from 'node-cron';
+import http from 'http';
 
 dotenv.config();
 
@@ -36,13 +37,15 @@ app.get('/ping', (req, res) => {
 });
 
 cron.schedule('*/5 * * * *', () => {
-  axios.get('http://localhost:5000/ping')
-    .then(response => {
-      console.log('Ping sent');
-    })
-    .catch(error => {
-      console.error('Error sending ping:', error);
+  http.get('http://localhost:3000/ping', (res) => {
+    console.log('Ping sent');
+    res.on('data', (chunk) => {
+      // Optional: If you want to log the response data
+      console.log(`Response data: ${chunk}`);
     });
+  }).on('error', (error) => {
+    console.error('Error sending ping:', error);
+  });
 });
 
 
