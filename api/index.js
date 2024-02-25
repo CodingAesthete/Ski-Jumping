@@ -9,6 +9,9 @@ import postRouter from './routes/post.route.js'
 import messageRouter from './routes/messages.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import job from './cron.js';
+
+job.start();
 
 dotenv.config();
 
